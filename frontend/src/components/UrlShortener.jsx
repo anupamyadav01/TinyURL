@@ -8,9 +8,12 @@ const UrlShortener = () => {
 
   const getDataFromBackend = async () => {
     try {
-      const response = await axios.post(`http://localhost:8080/shorten`, {
-        url,
-      });
+      const response = await axios.post(
+        `https://tinyurl-sxyw.onrender.com/shorten`,
+        {
+          url,
+        }
+      );
       if (response?.data?.shortURL) {
         setShortURL(response.data.shortURL);
         setShowShortUrl(true);
