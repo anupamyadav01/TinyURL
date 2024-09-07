@@ -5,7 +5,7 @@ const UrlShortener = () => {
   const [url, setUrl] = useState("");
   const [showShortUrl, setShowShortUrl] = useState(false);
   const [shortURL, setShortURL] = useState("");
-
+  console.log(shortURL);
   const getDataFromBackend = async () => {
     try {
       const response = await axios.post(
@@ -14,6 +14,7 @@ const UrlShortener = () => {
           url,
         }
       );
+
       if (response?.data?.shortURL) {
         setShortURL(response.data.shortURL);
         setShowShortUrl(true);

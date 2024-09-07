@@ -31,7 +31,7 @@ const getShortURL = async (req, res) => {
 
     res.send({
       success: true,
-      shortURL: `http://localhost:${portNo}/${shortURL}`,
+      shortURL: `https://tinyurl-sxyw.onrender.com/${shortURL}`,
     });
   } catch (error) {
     console.error("Error saving URL:", error);
