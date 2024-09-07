@@ -5,7 +5,12 @@ const UrlShortener = () => {
   const [url, setUrl] = useState("");
   const [showShortUrl, setShowShortUrl] = useState(false);
   const [shortURL, setShortURL] = useState("");
-  console.log(shortURL);
+  const [darkMode, setDarkMode] = useState(false); // State to manage dark mode
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   const getDataFromBackend = async () => {
     try {
       const response = await axios.post(
@@ -40,10 +45,27 @@ const UrlShortener = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-800 flex flex-col items-center justify-center text-center p-4">
-      <div className="bg-gray-900 text-white rounded-lg shadow-md p-6 w-full max-w-xl">
+    <div
+      className={`min-h-screen flex flex-col items-center justify-center text-center p-4 ${
+        darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <button
+        onClick={toggleDarkMode}
+        className={`p-2 px-5 mb-4 rounded-full ${
+          darkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"
+        }`}
+      >
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </button>
+
+      <div
+        className={`rounded-lg shadow-md p-6 w-full max-w-xl ${
+          darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+        }`}
+      >
         <h1 className="text-2xl font-semibold mb-4">Free URL Shortener</h1>
-        <p className="text-gray-400 mb-6">
+        <p className={`mb-6 ${darkMode ? "text-gray-400" : "text-gray-700"}`}>
           RB.GY is a free tool to{" "}
           <a href="#" className="text-blue-500">
             shorten URLs
@@ -56,7 +78,11 @@ const UrlShortener = () => {
             placeholder="Enter link here"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            className="w-full p-2 text-gray-900 rounded-lg border border-gray-600"
+            className={`w-full p-2 rounded-lg border ${
+              darkMode
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-black border-gray-300"
+            }`}
           />
           <button
             onClick={handleShortURL}
@@ -71,7 +97,11 @@ const UrlShortener = () => {
               type="text"
               readOnly
               value={shortURL}
-              className="outline-none w-full p-2 text-gray-900 rounded-lg border border-gray-600"
+              className={`outline-none w-full p-2 rounded-lg border ${
+                darkMode
+                  ? "bg-gray-700 text-white border-gray-600"
+                  : "bg-white text-black border-gray-300"
+              }`}
             />
             <button
               onClick={handleCopyUrl}
@@ -81,7 +111,11 @@ const UrlShortener = () => {
             </button>
           </div>
         )}
-        <p className="text-gray-400 text-sm mt-4">
+        <p
+          className={`text-sm mt-4 ${
+            darkMode ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
           By clicking Shorten URL, you agree to Rebrandly&apos;s{" "}
           <a href="#" className="text-blue-500">
             Terms of Use
